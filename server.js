@@ -1,20 +1,19 @@
 const { PeerServer } = require('peer');
-const http = require('http');
 
 const port = process.env.PORT || 9000;
 
-const peerServer = PeerServer({
+const server = PeerServer({
   port,
-  path: '/peerjs',
+  path: '/',
   allow_discovery: true,
   corsOptions: { origin: '*' }
 });
 
-peerServer.on('connection', client => {
+server.on('connection', client => {
   console.log('Client connected:', client.getId());
 });
 
-peerServer.on('disconnect', client => {
+server.on('disconnect', client => {
   console.log('Client disconnected:', client.getId());
 });
 
